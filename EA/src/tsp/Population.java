@@ -45,9 +45,27 @@ public class Population {
         }
         return fittest;
     }
+    
+    // Gets the best tour in the population
+    public int getAVGLenght() {
+//        Tour fittest = tours[0];
+//        // Loop through individuals to find fittest
+//        for (int i = 1; i < populationSize(); i++) {
+//            if (fittest.getFitness() <= getTour(i).getFitness()) {
+//                fittest = getTour(i);
+//            }
+//        }
+        int avgValue = 0;
+        
+        for(Tour avgCollect : tours){
+        	avgValue += avgCollect.getDistance();
+        }
+        return avgValue/tours.length;
+    }
 
     // Gets population size
     public int populationSize() {
         return tours.length;
     }
+
 }

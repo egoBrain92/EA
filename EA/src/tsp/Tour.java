@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Tour{
-
+	GraphHandler graphHandler = new GraphHandler();
     // Holds our tour of cities
     private ArrayList tour = new ArrayList<City>();
     // Cache
@@ -59,7 +59,7 @@ public class Tour{
     }
     
     // Gets the total distance of the tour
-    public int getDistance(){
+    public int getDistanceBackup(){
         if (distance == 0) {
             int tourDistance = 0;
             // Loop through our tour's cities
@@ -78,6 +78,39 @@ public class Tour{
                 }
                 // Get the distance between the two cities
                 tourDistance += fromCity.distanceTo(destinationCity);
+            }
+            distance = tourDistance;
+        }
+        return distance;
+    }
+    
+    // Gets the total distance of the tour
+    public int getDistance(){
+    	double disFromMatrix = 0; //graphHandler.adj[0][0];
+    	double tempInt = 0;
+        if (distance == 0) {
+            int tourDistance = 0;
+            // Loop through our tour's cities
+            for (int cityIndex=0; cityIndex < tourSize(); cityIndex++) {
+                // Get city we're travelling from
+                City fromCity = getCity(cityIndex);
+                // City we're travelling to
+                City destinationCity;
+                // Check we're not on our tour's last city, if we are set our
+                // tour's final destination city to our starting city
+                if(cityIndex+1 < tourSize()){
+                    destinationCity = getCity(cityIndex+1);
+                }
+                else{
+                    destinationCity = getCity(0);
+                }
+                // Get the distance between the two cities
+                tempInt = (int) graphHandler.adj[fromCity.cityID][destinationCity.cityID]; //fromCity.distanceTo(destinationCity);//
+                tourDistance += tempInt;
+
+//               	graphHandler.printGrid(graphHandler.adj, graphHandler.numberOfCitys);
+
+//               	System.out.println("fromCity.cityID: "+ fromCity.cityID + " destinationCity.cityID: " + destinationCity.cityID + " = tourDistance: " + tempInt);
             }
             distance = tourDistance;
         }

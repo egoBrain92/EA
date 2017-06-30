@@ -16,7 +16,7 @@ public class TSP_GA {
 	public static int generations = 1000;
 	public static int populationSize = 5000;
 	public static double mutationRate = 0.015;
-	public static String file = "inputGraph.txt";
+	public static String file = "inputGraph";
 	
 	public static int useDefaults = 1;
 	public static int graphInfos = -1;

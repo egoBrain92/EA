@@ -30,7 +30,7 @@ public class GraphHandler {
 
 		readingCitys(sc);
 		readingEdges(sc, adj);
-//		printAndCalcEdgeCoverage(numberOfCitys, numberOfEdges);
+//		
 		
 		replaceNotExisitingEdges(adj, numberOfCitys, 0, noEdgeLenght);
 		
@@ -42,6 +42,7 @@ public class GraphHandler {
 		if(TSP_GA.graphInfos == 1 || TSP_GA.graphInfos == 2){
 			System.out.println("Number of Citys: " + numberOfCitys);
 			System.out.println("Number of Edges: " + numberOfEdges);
+			printAndCalcEdgeCoverage(numberOfCitys, numberOfEdges);
 			if(TSP_GA.graphInfos == 1){
 				printGrid(adj, numberOfCitys);
 			}
@@ -84,7 +85,8 @@ public class GraphHandler {
 		maxEdges = (citys * (citys -1)) / 2;
 		double coverageInPercent = 0;
 		coverageInPercent = edges/maxEdges;
-//		System.out.println("edges coverage is: " + numberOfEdges+"/"+ maxEdges + " = " + coverageInPercent * 100 +"%.");
+		System.out.println("Maxiumum possible edges population: " + maxEdges);
+		System.out.println("Edge population for the graph is: " + coverageInPercent * 100 +"%.");
 	}
 
 	public void printGrid(double[][] a, int matrixSize) {

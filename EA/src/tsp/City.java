@@ -53,7 +53,8 @@ public class City {
     
     @Override
     public String toString(){
-    	String returnString = "(" + getCityID() + ") " +  getX()+", "+getY();
+    	String returnString = "("+ getCityID()+ "}, ";
+//    	String returnString = "(" + getCityID() + ") " +  getX()+", "+getY();
         return returnString;
     }
 }

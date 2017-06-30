@@ -129,10 +129,13 @@ public class Tour{
     
     @Override
     public String toString() {
-        String geneString = "|";
+        String geneString = "";
         for (int i = 0; i < tourSize(); i++) {
-            geneString += getCity(i)+"|";
+            geneString += getCity(i);
         }
+        if (geneString.endsWith(", ")) {
+        	geneString = geneString.substring(0, geneString.length() - 2);
+        	}
         return geneString;
     }
 }

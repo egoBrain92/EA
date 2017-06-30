@@ -6,10 +6,10 @@
 package tsp;
 
 public class GA {
-
+	
     /* GA parameters */
-    private static final double mutationRate = 0.015;
-//    private static final double mutationRate = 0.015;
+
+    private static final double mutationRate = TSP_GA.mutationRate;
     private static final int tournamentSize = 5;
     private static final boolean elitism = true;
 

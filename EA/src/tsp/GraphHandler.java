@@ -21,9 +21,9 @@ public class GraphHandler {
 		// reading meta information
 		Scanner sc = new Scanner(new File(fileNameAndPath));
 		numberOfCitys = sc.nextInt();
-//		System.out.println("numberOfCitys: " + numberOfCitys);
+//		
 		numberOfEdges = sc.nextInt();
-//		System.out.println("numberOfEdges: " + numberOfEdges);
+//		
 
 		
 		adj = new double[numberOfCitys][numberOfCitys];
@@ -32,14 +32,21 @@ public class GraphHandler {
 		readingEdges(sc, adj);
 //		printAndCalcEdgeCoverage(numberOfCitys, numberOfEdges);
 		
-		
-
 		replaceNotExisitingEdges(adj, numberOfCitys, 0, noEdgeLenght);
+		
+		
 		if(numberOfEdges == 0){
 			System.out.println("calculated all edges ");
 			calcGrid(adj, numberOfCitys);
 		}
-//		printGrid(adj, numberOfCitys);
+		if(TSP_GA.graphInfos == 1 || TSP_GA.graphInfos == 2){
+			System.out.println("Number of Citys: " + numberOfCitys);
+			System.out.println("Number of Edges: " + numberOfEdges);
+			if(TSP_GA.graphInfos == 1){
+				printGrid(adj, numberOfCitys);
+			}
+		}
+//		
 
 	}
 

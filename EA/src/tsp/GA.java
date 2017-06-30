@@ -9,6 +9,7 @@ public class GA {
 
     /* GA parameters */
     private static final double mutationRate = 0.015;
+//    private static final double mutationRate = 0.015;
     private static final int tournamentSize = 5;
     private static final boolean elitism = true;
 
@@ -43,7 +44,7 @@ public class GA {
 
         return newPopulation;
     }
-
+    //Order Crossover(OX)
     // Applies crossover to a set of parents and creates offspring
     public static Tour crossover(Tour parent1, Tour parent2) {
         // Create new child tour

@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class GraphHandler {
 
-	double noEdgeLenght = 9999999;
+	double noEdgeLenght = 9999;
 	public static ArrayList<City> inputCitys = new ArrayList<City>();
 	int numberOfCitys = 0;
 	int numberOfEdges = 0;
@@ -21,31 +21,26 @@ public class GraphHandler {
 		// reading meta information
 		Scanner sc = new Scanner(new File(fileNameAndPath));
 		numberOfCitys = sc.nextInt();
-		System.out.println("numberOfCitys: " + numberOfCitys);
+//		System.out.println("numberOfCitys: " + numberOfCitys);
 		numberOfEdges = sc.nextInt();
-		System.out.println("numberOfEdges: " + numberOfEdges);
+//		System.out.println("numberOfEdges: " + numberOfEdges);
 
 		
 		adj = new double[numberOfCitys][numberOfCitys];
-		// ArrayList[][] adj = new ArrayList[numberOfCitys][numberOfCitys];
 
 		readingCitys(sc);
-		System.out.println("added citys");
-
 		readingEdges(sc, adj);
+//		printAndCalcEdgeCoverage(numberOfCitys, numberOfEdges);
+		
+		
 
-		System.out.println("Resulting adj Matrix: ");
-		printGrid(adj, numberOfCitys);
-		calcGrid(adj, numberOfCitys);
-		//printGrid(adj, numberOfCitys);
-		replaceGrid(adj, numberOfCitys, 0, noEdgeLenght);
-		printGrid(adj, numberOfCitys);
-		// System.out.println(Arrays.deepToString(adj));
+		replaceNotExisitingEdges(adj, numberOfCitys, 0, noEdgeLenght);
+		if(numberOfEdges == 0){
+			System.out.println("calculated all edges ");
+			calcGrid(adj, numberOfCitys);
+		}
+//		printGrid(adj, numberOfCitys);
 
-		// return;
-		// sqrt(abs((9.5 - 35.4))^2 + abs((22.4 - 16.1))^2)
-		// sqrt(abs((99.508652 - 60.130619))^2 + abs((40.058596 - 50.508133))^2)
-		// (double)Math.round(value * 100000d) / 100000d
 	}
 
 	private void readingCitys(Scanner sc) {
@@ -58,6 +53,7 @@ public class GraphHandler {
 			inputCitys.add(dummy);
 			TourManager.addCity(dummy);
 		}
+//		System.out.println("added citys");
 	}
 
 	private void readingEdges(Scanner sc, double[][] adj) {
@@ -68,17 +64,30 @@ public class GraphHandler {
 			double dis = Double.parseDouble(sc.next());
 			// System.out.println("edge: " + dis +" x: "+x + " y: "+y);
 			adj[x][y] = dis;
+			adj[y][x] = dis;
 		}
-		System.out.println("added edges");
+//		System.out.println("added edges");
+//		System.out.println();
+	}
+	
+	private void printAndCalcEdgeCoverage (int numberOfCitys, int numberOfEdges) {
+		int citys = numberOfCitys;
+		double edges = numberOfEdges;
+		int maxEdges = 0;
+		maxEdges = (citys * (citys -1)) / 2;
+		double coverageInPercent = 0;
+		coverageInPercent = edges/maxEdges;
+//		System.out.println("edges coverage is: " + numberOfEdges+"/"+ maxEdges + " = " + coverageInPercent * 100 +"%.");
 	}
 
 	public void printGrid(double[][] a, int matrixSize) {
+		System.out.println("Resulting adj Matrix: ");
 		for (int i = 0; i < matrixSize; i++) {
 			for (int j = 0; j < matrixSize; j++) {
 				if (a[i][j] == noEdgeLenght) {
-					System.out.printf("%s \t", "----");
+					System.out.printf("%s\t", "[   ]");
 				} else {
-					System.out.printf("%.2f \t", a[i][j]);
+					System.out.printf("%.0f\t", a[i][j]);
 				}
 			}
 			System.out.println();
@@ -99,15 +108,26 @@ public class GraphHandler {
 		}
 	}
 
-	public void replaceGrid(double[][] a, int matrixSize, double target,
-			double x) {
+	public void replaceNotExisitingEdges(double[][] a, int matrixSize, double target,
+			double replaceValue) {
 		for (int i = 0; i < matrixSize; i++) {
 			for (int j = 0; j < matrixSize; j++) {
 				if (a[i][j] == target) {
-					if (i != j) {
-						a[i][j] = x;
+					if (i != j) { //avoid diagonal line
+						a[i][j] = replaceValue;
 					}
 				}
+			}
+		}
+	}
+	
+	public void replaceHalfGridWithDis(double[][] a, int matrixSize) {
+		int j = 0;
+		for (int i = 0; i < matrixSize; i++) {
+			j = 0;
+			while (j < i) {
+				a[i][j] = 666;
+				j++;
 			}
 		}
 	}

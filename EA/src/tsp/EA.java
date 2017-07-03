@@ -7,7 +7,7 @@ package tsp;
 
 public class EA {
 	
-    private static final double mutationRate = TSP_EA.mutationRate;
+    private static final double mutationRate = TSP_EA_Main.mutationRate;
     private static final int tournamentSize = 5;
     private static final boolean elitism = true;
 

@@ -39,11 +39,11 @@ public class GraphHandler {
 			System.out.println("calculated all edges ");
 			calcGrid(adj, numberOfNodes);
 		}
-		if(TSP_EA.graphInfos == 1 || TSP_EA.graphInfos == 2){
+		if(TSP_EA_Main.graphInfos == 1 || TSP_EA_Main.graphInfos == 2){
 			System.out.println("Number of Nodes: " + numberOfNodes);
 			System.out.println("Number of Edges: " + numberOfEdges);
 			printAndCalcEdgeCoverage(numberOfNodes, numberOfEdges);
-			if(TSP_EA.graphInfos == 1){
+			if(TSP_EA_Main.graphInfos == 1){
 				printGrid(adj, numberOfNodes);
 			}
 		}

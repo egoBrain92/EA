@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 
-public class TSP_EA {
+public class TSP_EA_Main {
 	
 		//EA params
 	public static int generations = 1000;

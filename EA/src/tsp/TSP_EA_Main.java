@@ -14,13 +14,13 @@ import java.io.InputStreamReader;
 
 public class TSP_EA_Main {
 	
-		//EA params
+	//EA params
 	public static int generations = 1000;
 	public static int populationSize = 5000;
 	public static double mutationRate = 0.015;
 	public static String file = "inputGraph";
 	
-		//output stuff
+	//output stuff
 	public static int useDefaults = 1;
 	public static int graphInfos = -1;
 	public static int consoleLimiter = 10;

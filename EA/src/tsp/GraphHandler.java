@@ -86,7 +86,13 @@ public class GraphHandler {
 		double coverageInPercent = 0;
 		coverageInPercent = edges/maxEdges;
 		System.out.println("Maxiumum possible edges population: " + maxEdges);
-		System.out.println("Edge population for the graph is: " + coverageInPercent * 100 +"%.");
+		
+		if(numberOfEdges == 0){
+			System.out.println("Edge population for the graph is: 100%");
+		}else{
+			System.out.println("Edge population for the graph is: " + coverageInPercent * 100 +"%.");
+		}
+		
 	}
 
 	public void printGrid(double[][] a, int matrixSize) {

@@ -1,15 +1,13 @@
 /*
-* GA.java
+* EA.java
 * Manages algorithms for evolving population
 */
 
 package tsp;
 
-public class GA {
+public class EA {
 	
-    /* GA parameters */
-
-    private static final double mutationRate = TSP_GA.mutationRate;
+    private static final double mutationRate = TSP_EA.mutationRate;
     private static final int tournamentSize = 5;
     private static final boolean elitism = true;
 
@@ -58,24 +56,24 @@ public class GA {
         for (int i = 0; i < child.tourSize(); i++) {
             // If our start position is less than the end position
             if (startPos < endPos && i > startPos && i < endPos) {
-                child.setCity(i, parent1.getCity(i));
+                child.setNode(i, parent1.getNode(i));
             } // If our start position is larger
             else if (startPos > endPos) {
                 if (!(i < startPos && i > endPos)) {
-                    child.setCity(i, parent1.getCity(i));
+                    child.setNode(i, parent1.getNode(i));
                 }
             }
         }
 
-        // Loop through parent2's city tour
+        // Loop through parent2's node tour
         for (int i = 0; i < parent2.tourSize(); i++) {
-            // If child doesn't have the city add it
-            if (!child.containsCity(parent2.getCity(i))) {
+            // If child doesn't have the node add it
+            if (!child.containsNode(parent2.getNode(i))) {
                 // Loop to find a spare position in the child's tour
                 for (int ii = 0; ii < child.tourSize(); ii++) {
-                    // Spare position found, add city
-                    if (child.getCity(ii) == null) {
-                        child.setCity(ii, parent2.getCity(i));
+                    // Spare position found, add node
+                    if (child.getNode(ii) == null) {
+                        child.setNode(ii, parent2.getNode(i));
                         break;
                     }
                 }
@@ -86,20 +84,20 @@ public class GA {
 
     // Mutate a tour using swap mutation
     private static void mutate(Tour tour) {
-        // Loop through tour cities
+        // Loop through tour nodes
         for(int tourPos1=0; tourPos1 < tour.tourSize(); tourPos1++){
             // Apply mutation rate
             if(Math.random() < mutationRate){
                 // Get a second random position in the tour
                 int tourPos2 = (int) (tour.tourSize() * Math.random());
 
-                // Get the cities at target position in tour
-                City city1 = tour.getCity(tourPos1);
-                City city2 = tour.getCity(tourPos2);
+                // Get the nodes at target position in tour
+                Node node1 = tour.getNode(tourPos1);
+                Node node2 = tour.getNode(tourPos2);
 
                 // Swap them around
-                tour.setCity(tourPos2, city1);
-                tour.setCity(tourPos1, city2);
+                tour.setNode(tourPos2, node1);
+                tour.setNode(tourPos1, node2);
             }
         }
     }

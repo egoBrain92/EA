@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class GraphHandler {
 
 	double noEdgeLenght = 9999;
-	public static ArrayList<City> inputCitys = new ArrayList<City>();
-	int numberOfCitys = 0;
+	public static ArrayList<Node> inputNodes = new ArrayList<Node>();
+	int numberOfNodes = 0;
 	int numberOfEdges = 0;
 	public static double[][] adj;
 	
@@ -20,48 +20,48 @@ public class GraphHandler {
 
 		// reading meta information
 		Scanner sc = new Scanner(new File(fileNameAndPath));
-		numberOfCitys = sc.nextInt();
+		numberOfNodes = sc.nextInt();
 //		
 		numberOfEdges = sc.nextInt();
 //		
 
 		
-		adj = new double[numberOfCitys][numberOfCitys];
+		adj = new double[numberOfNodes][numberOfNodes];
 
-		readingCitys(sc);
+		readingNodes(sc);
 		readingEdges(sc, adj);
 //		
 		
-		replaceNotExisitingEdges(adj, numberOfCitys, 0, noEdgeLenght);
+		replaceNotExisitingEdges(adj, numberOfNodes, 0, noEdgeLenght);
 		
 		
 		if(numberOfEdges == 0){
 			System.out.println("calculated all edges ");
-			calcGrid(adj, numberOfCitys);
+			calcGrid(adj, numberOfNodes);
 		}
-		if(TSP_GA.graphInfos == 1 || TSP_GA.graphInfos == 2){
-			System.out.println("Number of Citys: " + numberOfCitys);
+		if(TSP_EA.graphInfos == 1 || TSP_EA.graphInfos == 2){
+			System.out.println("Number of Nodes: " + numberOfNodes);
 			System.out.println("Number of Edges: " + numberOfEdges);
-			printAndCalcEdgeCoverage(numberOfCitys, numberOfEdges);
-			if(TSP_GA.graphInfos == 1){
-				printGrid(adj, numberOfCitys);
+			printAndCalcEdgeCoverage(numberOfNodes, numberOfEdges);
+			if(TSP_EA.graphInfos == 1){
+				printGrid(adj, numberOfNodes);
 			}
 		}
 //		
 
 	}
 
-	private void readingCitys(Scanner sc) {
-		// reading citys
-		for (int i = 0; i < numberOfCitys; i++) {
+	private void readingNodes(Scanner sc) {
+		// reading nodes
+		for (int i = 0; i < numberOfNodes; i++) {
 			double x = Double.parseDouble(sc.next());
 			double y = Double.parseDouble(sc.next());
-			// System.out.println("City: " + i + " x: "+x + " y: "+y);
-			City dummy = new City(x, y, i);
-			inputCitys.add(dummy);
-			TourManager.addCity(dummy);
+			// System.out.println("node: " + i + " x: "+x + " y: "+y);
+			Node dummy = new Node(x, y, i);
+			inputNodes.add(dummy);
+			TourManager.addNode(dummy);
 		}
-//		System.out.println("added citys");
+//		System.out.println("added nodes");
 	}
 
 	private void readingEdges(Scanner sc, double[][] adj) {
@@ -78,11 +78,11 @@ public class GraphHandler {
 //		System.out.println();
 	}
 	
-	private void printAndCalcEdgeCoverage (int numberOfCitys, int numberOfEdges) {
-		int citys = numberOfCitys;
+	private void printAndCalcEdgeCoverage (int numberOfNodes, int numberOfEdges) {
+		int nodes = numberOfNodes;
 		double edges = numberOfEdges;
 		int maxEdges = 0;
-		maxEdges = (citys * (citys -1)) / 2;
+		maxEdges = (nodes * (nodes -1)) / 2;
 		double coverageInPercent = 0;
 		coverageInPercent = edges/maxEdges;
 		System.out.println("Maxiumum possible edges population: " + maxEdges);
@@ -107,10 +107,10 @@ public class GraphHandler {
 		for (int i = 0; i < matrixSize; i++) {
 			for (int j = 0; j < matrixSize; j++) {
 				if(a[i][j] != 0 || a[i][j] !=noEdgeLenght){
-					City cityI = inputCitys.get(i);
-					City cityJ = inputCitys.get(j);
-					a[i][j] = distanceTo(cityI, cityJ);
-					a[j][i] = distanceTo(cityI, cityJ);
+					Node nodeI = inputNodes.get(i);
+					Node nodeJ = inputNodes.get(j);
+					a[i][j] = distanceTo(nodeI, nodeJ);
+					a[j][i] = distanceTo(nodeI, nodeJ);
 
 				}
 			}
@@ -141,10 +141,10 @@ public class GraphHandler {
 		}
 	}
 	
-    // Gets the distance to given city
-    public double distanceTo(City cityStart, City city){
-    	double xDistance = Math.abs(cityStart.getX() - city.getX());
-    	double yDistance = Math.abs(cityStart.getY() - city.getY());
+    // Gets the distance to given node
+    public double distanceTo(Node nodeStart, Node node){
+    	double xDistance = Math.abs(nodeStart.getX() - node.getX());
+    	double yDistance = Math.abs(nodeStart.getY() - node.getY());
         double distance  = Math.sqrt( (xDistance*xDistance) + (yDistance*yDistance) );
         //rounding for better readability in console
         int distance2 = (int) (distance + 0.5);

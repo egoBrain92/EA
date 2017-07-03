@@ -16,7 +16,7 @@ public class Menu {
 	
 	public void getUserInputOnGraphPrinting() throws IOException{
         try{
-        	TSP_GA.graphInfos = Integer.parseInt(br.readLine());
+        	TSP_EA.graphInfos = Integer.parseInt(br.readLine());
         }catch(NumberFormatException nfe){
             System.err.println("Invalid Format.");
         }
@@ -30,7 +30,7 @@ public class Menu {
 	
 	public void getUserInputOnEA() throws IOException{
         try{
-        	TSP_GA.consoleLimiter = Integer.parseInt(br.readLine());
+        	TSP_EA.consoleLimiter = Integer.parseInt(br.readLine());
         }catch(NumberFormatException nfe){
             System.err.println("Invalid Format.");
         }
@@ -44,7 +44,7 @@ public class Menu {
 	
 	public void getUserInputOnEA2() throws IOException{
         try{
-        	TSP_GA.howManyGensToPrint = Integer.parseInt(br.readLine());
+        	TSP_EA.howManyGensToPrint = Integer.parseInt(br.readLine());
         }catch(NumberFormatException nfe){
             System.err.println("Invalid Format.");
         }
@@ -59,7 +59,7 @@ public class Menu {
 	
 	public void getUserInputOnEA3() throws IOException{
         try{
-        	TSP_GA.progressAllowed = Integer.parseInt(br.readLine());
+        	TSP_EA.progressAllowed = Integer.parseInt(br.readLine());
         }catch(NumberFormatException nfe){
             System.err.println("Invalid Format.");
         }
@@ -73,7 +73,7 @@ public class Menu {
 	
 	public void getUserInputOnEA4() throws IOException{
         try{
-        	TSP_GA.useDefaults = Integer.parseInt(br.readLine());
+        	TSP_EA.useDefaults = Integer.parseInt(br.readLine());
         }catch(NumberFormatException nfe){
             System.err.println("Invalid Format.");
         }
@@ -95,9 +95,9 @@ public class Menu {
         
         System.out.println();
         System.out.println("Following settings will be used for EA");
-        System.out.println("Generations: "+ TSP_GA.generations);
-        System.out.println("Population size: "+ TSP_GA.populationSize);
-        System.out.println("Mutation ratee: "+ TSP_GA.mutationRate);
+        System.out.println("Generations: "+ TSP_EA.generations);
+        System.out.println("Population size: "+ TSP_EA.populationSize);
+        System.out.println("Mutation ratee: "+ TSP_EA.mutationRate);
         System.out.println();
         System.out.println("Continue? (1 = yes)");
         getUserInputOnEAContinue();
@@ -105,21 +105,21 @@ public class Menu {
 	
 	public void getUserInputOnEAGenerations() throws IOException{
         try{
-        	TSP_GA.generations = Integer.parseInt(br.readLine());
+        	TSP_EA.generations = Integer.parseInt(br.readLine());
         }catch(NumberFormatException nfe){
             System.err.println("Invalid Format.");
         }
 	}
 	public void getUserInputOnEAPopulationSize() throws IOException{
         try{
-        	TSP_GA.populationSize = Integer.parseInt(br.readLine());
+        	TSP_EA.populationSize = Integer.parseInt(br.readLine());
         }catch(NumberFormatException nfe){
             System.err.println("Invalid Format.");
         }
 	}
 	public void getUserInputOnEAMutationRate() throws IOException{
 		try {
-			TSP_GA.mutationRate = Double.parseDouble(br.readLine());
+			TSP_EA.mutationRate = Double.parseDouble(br.readLine());
 		} catch (NumberFormatException nfe) {
 			System.err.println("Invalid Format.");
 		}
@@ -127,7 +127,7 @@ public class Menu {
 	
 	public void getUserInputOnEAContinue() throws IOException{
         try{
-        	TSP_GA.Continue = Integer.parseInt(br.readLine());
+        	TSP_EA.Continue = Integer.parseInt(br.readLine());
         }catch(NumberFormatException nfe){
             System.err.println("Invalid Format.");
         }
@@ -139,7 +139,7 @@ public class Menu {
 
 	public void getUserInputOnInit() throws IOException {
 		try {
-			TSP_GA.init = Integer.parseInt(br.readLine());
+			TSP_EA.init = Integer.parseInt(br.readLine());
 		} catch (NumberFormatException nfe) {
 			System.err.println("Invalid Format.");
 		}

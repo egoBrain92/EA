@@ -7,17 +7,20 @@ package tsp;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class TSP_GA {
+
+public class TSP_EA {
 	
-	
+		//EA params
 	public static int generations = 1000;
 	public static int populationSize = 5000;
 	public static double mutationRate = 0.015;
 	public static String file = "inputGraph";
 	
+		//output stuff
 	public static int useDefaults = 1;
 	public static int graphInfos = -1;
 	public static int consoleLimiter = 10;
@@ -26,21 +29,17 @@ public class TSP_GA {
 	public static int init = 1;
 	public static int Continue = 1;
 	
-	
+		
     public static void main(String[] args) throws IOException {
 
     	GraphHandler graphHandler = new GraphHandler();
     	Menu menu = new Menu();
-
-
-
     	
     	Tour bestTour = new Tour();
-    	
-    	
-
+ 
         menu.printInit();
         menu.getUserInputOnInit();
+        
         if(init == 0){
             menu.printMenu();
             menu.getUserInputOnGraphPrinting();
@@ -68,12 +67,9 @@ public class TSP_GA {
         Population pop = new Population(populationSize, true);
         
         bestTour = pop.getFittest();
-//        System.out.println("Initial distance: " + pop.getFittest().getDistance());
-//        System.out.println(bestTour);
-
-    	
-        // Evolve population for "generations" amount of times
-        pop = GA.evolvePopulation(pop);
+        
+         // Evolve population for "generations" amount of times
+        pop = EA.evolvePopulation(pop);
         
         int j = 1;
         int k = 10;
@@ -81,15 +77,14 @@ public class TSP_GA {
 			// if(i % consoleLimiter == 0 && i < generations/1){
 			if(j % (generations/10 ) == 0 && progressAllowed == 1){
 				System.out.println("Progress: " + k + "%");
-				k = k + 10;
-				
+				k = k + 10;			
 			}
 			j++;
 			if (i % consoleLimiter == 0 && i < howManyGensToPrint){
         		System.out.println("gen:\t" + i + "\tavgFitnest:\t" + pop.getAVGLenght() +"\t" + "best:\t" + bestTour.getDistance());
         	}
 
-            pop = GA.evolvePopulation(pop);
+            pop = EA.evolvePopulation(pop);
             if(pop.getFittest().getDistance() < bestTour.getDistance()){
             	bestTour = pop.getFittest();
             }    

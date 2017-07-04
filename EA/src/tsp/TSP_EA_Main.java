@@ -69,12 +69,15 @@ public class TSP_EA_Main {
         bestTour = pop.getFittest();
         
          // Evolve population for "generations" amount of times
+        long startTime = System.currentTimeMillis();
         pop = EA.evolvePopulation(pop);
         
         int j = 1;
         int k = 10;
+        if(progressAllowed == 1){
+        	System.out.println("Progress: 0" + "%");
+        }
 		for (int i = 0; i < generations; i++) {
-			// if(i % consoleLimiter == 0 && i < generations/1){
 			if(j % (generations/10 ) == 0 && progressAllowed == 1){
 				System.out.println("Progress: " + k + "%");
 				k = k + 10;			
@@ -87,12 +90,21 @@ public class TSP_EA_Main {
             pop = EA.evolvePopulation(pop);
             if(pop.getFittest().getDistance() < bestTour.getDistance()){
             	bestTour = pop.getFittest();
-            }    
+//            	if(bestTour.getDistance() == 440){
+//            		long endTime   = System.currentTimeMillis();
+//            		long totalTime = endTime - startTime;
+//            		System.out.println("Runtime in MS: " + totalTime);
+//            	}
+            }
         }
-
+		
+		long endTime   = System.currentTimeMillis();
+		long totalTime = endTime - startTime;
+		
         // Print results
 		System.out.println();
-		System.out.println("average for remaining individuals: " + pop.getAVGLenght());
+		System.out.println("Runtime in MS: " + totalTime);
+		System.out.println("Average for remaining individuals: " + pop.getAVGLenght());
         System.out.println("Best individual is: " + bestTour.getDistance());
         System.out.println("Best individual visits the nodes in the following order: ");
         System.out.println(bestTour);
